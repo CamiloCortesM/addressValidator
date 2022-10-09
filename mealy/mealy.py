@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from distutils.log import error
 from typing import Dict, Generic, Iterable, Iterator, Optional, Tuple, TypeVar
 import re
 
@@ -59,7 +58,7 @@ class State:
         return result
 
         # TODO
-        # para poder hacer la validacion de barrio manzana etc, se devera retornal el error en true a si mismo si retorna true 
+        # para poder hacer la validacion de barrio manzana etc, se devera retornar el error en true a si mismo si retorna true 
         # y el estado se encuentra en algun nombre de barrio manzana etc. devera pasar al siguiente estado ya que no encontro ninguna llave para nombrar
         # try:
         #     state, out = self.paths[step]
@@ -72,15 +71,21 @@ class State:
         state = self
         words = re.split(" ",steps)
  
-        result: Optional[MealyResult] = state.step(words[0])
+        for word in words:
 
-        if result:
-            if result.error:
-                print("error")
+            print(word)
+            result: Optional[MealyResult] = state.step(word)
+
+            if result:
+                if result.error:
+                    print("error")
+                else:
+                    state = result.state
+                    print(result)
             else:
-                print(result)
-        else:
-            print("mas error")
+                return print("mas error")
+
+      
         """
         for step in steps:
             result: Optional[MealyResult] = state.step(step)
@@ -139,47 +144,47 @@ def test_mealy():
     q37 = State("q37")
     
  
-    q0.set_paths([Path("tv", q1, "0",'(Carrera|Calle)'), Path("br2", q30, "0",'regex'),Path("vda", q25, "0",'regex'),Path("km", q21, "0",'regex')])
+    q0.set_paths([Path("tv", q1, "0",r'\b(AU|AV|AC|AK|BL|CL|KR|CT|CQ|CV|CC|DG|PJ|PS|PT|TV|VT|VI)\b'), Path("br2", q30, "0",r'\b(BR|CD|SM)\b'),Path("vda", q25, "0",r'\bVDA\b'),Path("km", q21, "0",r'\bKM\b')])
     #Urbana
-    q1.set_paths([Path("nv", q2, "0",'regex')])
-    q2.set_paths([Path("lv", q3, "0",'regex')])
-    q3.set_paths([Path("bis", q4, "0",'regex')])
-    q4.set_paths([Path("lp", q5, "0",'regex')])
-    q5.set_paths([Path("c", q6, "0",'regex')])
-    q6.set_paths([Path("nv", q7, "0",'regex')])
-    q7.set_paths([Path("lv", q8, "0",'regex')])
-    q8.set_paths([Path("bis", q9, "0",'regex')])
-    q9.set_paths([Path("ls", q10, "0",'regex')])
-    q10.set_paths([Path("np", q11, "1",'regex')])
-    q11.set_paths([Path("c", q20, "1",'regex')])
-    q20.set_paths([Path("br", q12, "0",'regex')])
-    q12.set_paths([Path("nb", q13, "1",'regex')])
-    q13.set_paths([Path("u", q14, "0",'regex')])
-    q14.set_paths([Path("nu", q15, "1",'regex')])
-    q15.set_paths([Path("ma", q16, "0",'regex')])
-    q16.set_paths([Path("nma", q17, "1",'regex')])
-    q17.set_paths([Path("tp", q18, "0",'regex')])
-    q18.set_paths([Path("ip", q19, "1",'regex')])
+    q1.set_paths([Path("nv", q2, "0",r'\b[1-9][0-9]{0,2}\b')])
+    q2.set_paths([Path("lv", q3, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q3.set_paths([Path("bis", q4, "0",r'^BIS$')])
+    q4.set_paths([Path("lp", q5, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q5.set_paths([Path("c", q6, "0",r'^(NORTE|SUR|ESTE|OESTE)$')])
+    q6.set_paths([Path("nv", q7, "0",r'\b[1-9][0-9]{0,2}\b')])
+    q7.set_paths([Path("lv", q8, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q8.set_paths([Path("bis", q9, "0",r'^BIS$')])
+    q9.set_paths([Path("ls", q10, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q10.set_paths([Path("np", q11, "1",r'\b[1-9][0-9]{0,2}\b')])
+    q11.set_paths([Path("c", q20, "1",r'^(NORTE|SUR|ESTE|OESTE)$')])
+    q20.set_paths([Path("br", q12, "0",r'^(BR|CD|SM)$')])
+    q12.set_paths([Path("nb", q13, "1",r'^\w+$')])
+    q13.set_paths([Path("u", q14, "0",r'^(BQ|CU|CO|ET|UR|SC|TO|ZN)$')])
+    q14.set_paths([Path("nu", q15, "1",r'^\w+$')])
+    q15.set_paths([Path("ma", q16, "0",r'^(MZ|IN|SC|ET|ED|MD|TO)$')])
+    q16.set_paths([Path("nma", q17, "1",r'^\w+$')])
+    q17.set_paths([Path("tp", q18, "0",r'^(AL|AP|BG|CD|CN|DP|DS|GA|GS|LC|LM|LT|MN|OF|PA|PN|PL|PD|SS|SO|ST|TZ|UN|UL)$')])
+    q18.set_paths([Path("ip", q19, "1",r'^\w+$')])
     #Km y via //rural
-    q21.set_paths([Path("nkm", q22, "0",'regex')])
-    q22.set_paths([Path("v", q23, "0",'regex')])
-    q23.set_paths([Path("n1", q24, "1",'regex')])
-    q24.set_paths([Path("n2", q29, "1",'regex')])
+    q21.set_paths([Path("nkm", q22, "0",r'^[1-9][0-9]{0,1}$')])
+    q22.set_paths([Path("v", q23, "0",r'^V$')])
+    q23.set_paths([Path("n1", q24, "1",r'^[A-Z]+$')])
+    q24.set_paths([Path("n2", q29, "1",r'^[A-Z]+$')])
     #Barrio // urbana
-    q30.set_paths([Path("nb2", q31, "0",'regex')])
-    q31.set_paths([Path("u2", q32, "0",'regex')])
-    q32.set_paths([Path("nu2", q33, "0",'regex')])
-    q33.set_paths([Path("ma2", q34, "0",'regex')])
-    q34.set_paths([Path("nma2", q35, "0",'regex')])
-    q35.set_paths([Path("tp", q36, "0",'regex')])
-    q36.set_paths([Path("ip", q37, "1",'regex')])
+    q30.set_paths([Path("nb2", q31, "0",r'^\w+$')])
+    q31.set_paths([Path("u2", q32, "0",r'^(BQ|CU|CO|ET|UR|SC|TO|ZN)$')])
+    q32.set_paths([Path("nu2", q33, "0",r'^\w+$')])
+    q33.set_paths([Path("ma2", q34, "0",r'^(MZ|IN|SC|ET|ED|MD|TO)$')])
+    q34.set_paths([Path("nma2", q35, "0",r'^\w+$')])
+    q35.set_paths([Path("tp", q36, "0",r'^(AL,AP,BG,CD,CN,DP,DS,GA,GS,LC,LM,LT,MN,OF,PA,PN,PL,PD,SS,SO,ST,TZ,UN,UL)$')])
+    q36.set_paths([Path("ip", q37, "1",r'^\w+$')])
     #Vereda // rural
-    q25.set_paths([Path("nvda", q26, "1",'regex')])
-    q26.set_paths([Path("sc", q27, "0",'regex')])
-    q27.set_paths([Path("nsc", q28, "1",'regex')])
+    q25.set_paths([Path("nvda", q26, "1",r'^\w+$')])
+    q26.set_paths([Path("sc", q27, "0",r'^SC$')])
+    q27.set_paths([Path("nsc", q28, "1",r'^\w+$')])
     
    
-    q0.walk("test")
+    q0.walk("TV 12 A BIS A NORTE 12 A BIS AB 12 NORTE BR SAN_LUCAS BQ 5 MZ 1 AP 201")
     
 
 if __name__ == "__main__":
