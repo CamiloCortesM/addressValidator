@@ -85,7 +85,7 @@ class State:
                     state = result.state
                     print(result)
             else:
-                return print("mas error")
+                return print("invalido")
 
       
         """
@@ -148,8 +148,8 @@ def test_mealy():
     #Urbana
     q1.set_paths([Path("nv", q2, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q2.set_paths([Path("bis", q3, "0",r'^BIS$'),Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
-    q3.set_paths([Path("lp", q4, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
-    q4.set_paths([Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$')])
+    q3.set_paths([Path("lp", q4, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q4.set_paths([Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q5.set_paths([Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q6.set_paths([Path("bis", q7, "0",r'^BIS$'),Path("np", q9, "1",r'\b[1-9][0-9]{0,2}\b')])
     q7.set_paths([Path("lp", q8, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
@@ -183,10 +183,10 @@ def test_mealy():
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
     
-    # q0.walk("Carrera 7B #1-20 Apartamento 201")
+    q0.walk("Carrera 7 BIS #1-20 Apartamento 201")
     # q0.walk("Vereda San_Juan Sector La_uida")
     # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
-    q0.walk("Kilometro 32 Via Duitama-Paipa")
+    # q0.walk("Kilometro 32 Via Duitama-Paipa")
     
 
 if __name__ == "__main__":
