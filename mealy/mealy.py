@@ -152,7 +152,7 @@ def test_mealy():
     q4.set_paths([Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q5.set_paths([Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q6.set_paths([Path("bis", q7, "0",r'^BIS$'),Path("np", q9, "1",r'\b[1-9][0-9]{0,2}\b')])
-    q7.set_paths([Path("lp", q8, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q7.set_paths([Path("lp", q8, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$'),Path("np", q9, "1",r'\b[1-9][0-9]{0,2}\b')])
     q8.set_paths([Path("np", q9, "1",r'\b[1-9][0-9]{0,2}\b')])
     q9.set_paths([Path("c", q10, "1",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("br", q11, "0",r'^(Barrio|Ciudadela|Supermanzana)$'),Path("u", q13, "0",r'^(Bloque|Celula|conjunto Residencial|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$')])
     q10.set_paths([Path("br", q11, "0",r'^(Barrio|Ciudadela|Supermanzana)$'),Path("u", q13, "0",r'^(Bloque|Celula|conjunto Residencial|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$')])
@@ -183,7 +183,7 @@ def test_mealy():
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
     
-    q0.walk("Carrera 7 BIS #1-20 Apartamento 201")
+    q0.walk("Carrera 7 BIS B #1 BIS-20 Apartamento 201")
     # q0.walk("Vereda San_Juan Sector La_uida")
     # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
     # q0.walk("Kilometro 32 Via Duitama-Paipa")
