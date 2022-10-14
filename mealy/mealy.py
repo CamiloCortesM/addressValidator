@@ -8,7 +8,6 @@ __all__ = ["State", "Path", "MealyResult"]
 T = TypeVar("T")  
 O = TypeVar("O")  
 E = TypeVar("E")
-W = TypeVar("W")
 
 @dataclass
 class Path(Generic[T,O,E]): 
@@ -18,14 +17,13 @@ class Path(Generic[T,O,E]):
     regex: E
 
 @dataclass
-class MealyResult(Generic[T, O,W]):  
+class MealyResult(Generic[T, O]):  
     step: T
     state: "State"
     out: O
-    error:W
 
     def __str__(self) -> str:
-        return f"{self.step} => {self.state} / {self.out} /{self.error}"
+        return f"{self.step} => {self.state} / {self.out}"
 
 
 class State:
@@ -44,68 +42,39 @@ class State:
             self.set_path(path)
 
     def step(self, step: T) -> Optional[MealyResult]:
-        error = False
         result = None
         for paths in self.paths:
             regex = self.paths[paths]["regex"]
             state, out = self.paths[paths]["value"]
             validate = re.match(regex,step)
             if validate:
-                return MealyResult(step, state, out,error)
-            elif paths == "b" or paths == "r2":
-                error = True
-                return MealyResult(step, state, out,error)
+                return MealyResult(step, state, out)
         return result
-
-        # TODO
-        # para poder hacer la validacion de barrio manzana etc, se devera retornar el error en true a si mismo si retorna true 
-        # y el estado se encuentra en algun nombre de barrio manzana etc. devera pasar al siguiente estado ya que no encontro ninguna llave para nombrar
-        # try:
-        #     state, out = self.paths[step]
-        #     result = MealyResult(step, state, out)
-        # except KeyError:
-        #     result = None
-        # return result
 
     def walk(self, steps: str) -> Iterator[MealyResult]:
         state = self
+        out = None
         words = re.split(r"[- #]",steps)
-        
         words = list(filter(None, words))
         print(words)
+
         for word in words:
-
-            print(word)
             result: Optional[MealyResult] = state.step(word)
-
             if result:
-                if result.error:
-                    print("error")
-                else:
                     state = result.state
+                    out = result.out
                     print(result)
             else:
-                return print("invalido")
-
+                return False
+        if out == "1":
+            return True
+        return False
       
-        """
-        for step in steps:
-            result: Optional[MealyResult] = state.step(step)
-            if result:
-                state = result.state
-                yield result
-            else:
-                raise ValueError(
-                    f"Can't take given steps. State {state.name} hasn't set a Path for Step {step}."
-                )
-
-        """
     def __str__(self) -> str:
         return self.name
 
 
 def test_mealy():
-
     q0 = State("q0")
     q1 = State("q1")
     q2 = State("q2")
@@ -183,11 +152,14 @@ def test_mealy():
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
     
-    q0.walk("Carrera 7 BIS B #1 BIS-20 Apartamento 201")
+    validation = q0.walk("Carrera 72 #1")
     # q0.walk("Vereda San_Juan Sector La_uida")
     # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
     # q0.walk("Kilometro 32 Via Duitama-Paipa")
-    
-
+    print(validation)
+    if validation :
+        print("Cadena Aceptada")
+    else:
+        print("Cadena rechazada")
 if __name__ == "__main__":
     test_mealy()
