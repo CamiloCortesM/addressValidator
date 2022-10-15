@@ -130,7 +130,7 @@ def test_mealy():
     q9.set_paths([Path("c", q10, "1",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("br", q11, "0",r'^(Barrio|Ciudadela|Supermanzana)$'),Path("u", q13, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$')])
     q10.set_paths([Path("br", q11, "0",r'^(Barrio|Ciudadela|Supermanzana)$'),Path("u", q13, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$')])
     q11.set_paths([Path("nb", q12, "1",r'^\w+$')])
-    q12.set_paths([Path("u", q13, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$')])
+    q12.set_paths([Path("u", q13, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$'),Path("nb", q12, "1",r'^\w+$')])
     q13.set_paths([Path("nu", q14, "1",r'^\w+$')])
     q14.set_paths([Path("ma", q15, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("tp", q17, "0",r'^(Altillo|Apartamento|Bodega|Casa|Consultorio|Deposito|Garaje|Local|Lote|Mezzanine|Oficina|Parqueadero|Pent-House|Planta|Predio|Semisotano|Sotano|Suite|Terraza|Unidad)$')])
     q15.set_paths([Path("nma", q16, "1",r'^\w+$')])
@@ -139,7 +139,7 @@ def test_mealy():
     
     #Barrio // urbana
     q19.set_paths([Path("nb", q20, "0",r'^\w+$')])
-    q20.set_paths([Path("u", q21, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$')])
+    q20.set_paths([Path("u", q21, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("nb", q20, "0",r'^\w+$')])
     q21.set_paths([Path("nu", q22, "0",r'^\w+$')])
     q22.set_paths([Path("ma", q23, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$')])
     q23.set_paths([Path("nma", q24, "1",r'^\w+$')])
@@ -148,15 +148,16 @@ def test_mealy():
     
     #Vereda // rural
     q27.set_paths([Path("nvda", q28, "1",r'^\w+$')])
-    q28.set_paths([Path("sc", q29, "0",r'^Sector$')])
+    q28.set_paths([Path("sc", q29, "0",r'^Sector$'),Path("nvda", q28, "1",r'^\w+$')])
     q29.set_paths([Path("nsc", q30, "1",r'^\w+$')])
+    q30.set_paths([Path("nsc", q30, "1",r'^\w+$')])
     #Km y via //rural
     q31.set_paths([Path("nmk", q32, "0",r'^[1-9][0-9]{0,2}$')])
     q32.set_paths([Path("v", q33, "0",r'^Via$')])
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
     
-    validation = q0.walk("Avenida Calle 72 #1-10")
+    validation = q0.walk("Transversal 100A4C BIS D3A #23A2B-10 NORTE Barrio samanta de anteojos")
     # q0.walk("Vereda San_Juan Sector La_uida")
     # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
     # q0.walk("Kilometro 32 Via Duitama-Paipa")
