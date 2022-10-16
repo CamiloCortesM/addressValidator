@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, Generic, Iterable, Iterator, Optional, Tuple, TypeVar
+from typing import Dict, Generic, Iterable, Iterator, Optional, Tuple, TypeVar,TextIO
 import re
 
 __all__ = ["State", "Path", "MealyResult"]
@@ -54,6 +54,7 @@ class State:
     def walk(self, steps: str) -> Iterator[MealyResult]:
         state = self
         out = None
+        steps = steps.rstrip('\n')
         words = re.split(r"[- #]",steps)
         words = list(filter(None, words))
         if(words[0] == "Avenida" and words[1] == "Calle" or words[0] == "Avenida" and words[1]=="Carrera" or words[0] == "Cuentas" and words[1]=="Corridas"):
@@ -114,7 +115,9 @@ q33 = State("q33")
 q34 = State("q34")
 q35 = State("q35")
 
-def address_validator():
+
+
+def address_validator(word: str = "Calle 3B #10-03") -> bool:
     q0.set_paths([Path("tv", q1, "0",r'\b(Autopista|Avenida|Avenida Calle|Avenida Carrera|Bulevar|Calle|Carrera|Carretera|Circular|Circunvalar|Diagonal|Cuentas Corridas|Pasaje|Paseo|Peatonal|Transversal|Variante|Via|Troncal)\b'), Path("br2", q19, "0",r'\b(Barrio|Ciudadela|Supermanzana)\b'),Path("vda", q27, "0",r'\bVereda\b'),Path("km", q31, "0",r'\bKilometro\b')])
     #Urbana
     q1.set_paths([Path("nv", q2, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
@@ -155,18 +158,19 @@ def address_validator():
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
     
-    validation = q0.walk("Cuentas Corridas 100A4C BIS D3A #23A2B-10 NORTE Barrio samanta de anteojos")
+    validation = q0.walk(word)
     # q0.walk("Transversal 100A4C BIS D3A #23A2B-10 NORTE Barrio samanta de anteojos")
     # q0.walk("Vereda San_Juan Sector La_uida")
     # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
     # q0.walk("Kilometro 32 Via Duitama-Paipa")
+
     print(validation)
     if validation :
         print("Cadena Aceptada")
     else:
         print("Cadena rechazada")
 
-def address_validator_dian():
+def address_validator_dian(word: str = "CL 3 B 10 03")-> bool:
    
     q0.set_paths([Path("tv", q1, "0",r'\b(AU|AV|AC|AK|BL|CL|KR|CT|CQ|CV|DG|CC|PJ|PS|PT|TV|VT|VI|TC)\b'), Path("br2", q19, "0",r'\b(BR|CD|SM)\b'),Path("vda", q27, "0",r'\bVDA\b'),Path("km", q31, "0",r'\bKM\b')])
     #Urbana
@@ -209,16 +213,25 @@ def address_validator_dian():
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
 
-    validation = q0.walk("AV 10 AB BIS 3 10 BR Santa Maria")
-    # q0.walk("Transversal 100A4C BIS D3A #23A2B-10 NORTE Barrio samanta de anteojos")
-    # q0.walk("Vereda San_Juan Sector La_uida")
-    # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
-    # q0.walk("Kilometro 32 Via Duitama-Paipa")
+    validation = q0.walk(word)
+
     print(validation)
     if validation :
         print("Cadena Aceptada")
     else:
         print("Cadena rechazada")
 
+def address_validator_file(file: TextIO):
+    files_address: str = file.readlines()
+    for file in files_address:
+        address_validator(file)
+
+def address_validator_file_dian(file: TextIO):
+    files_address: str = file.readlines()
+    for file in files_address:
+        address_validator_dian(file)
+
 if __name__ == "__main__":
-    address_validator_dian()
+    with open("address.txt") as file_object:
+        address_validator_file(file_object)
+    
