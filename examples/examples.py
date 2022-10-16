@@ -1,4 +1,4 @@
-from addressValidator import address_validator,address_validator_dian
+from addressValidator import address_validator,address_validator_dian,address_validator_file,address_validator_file_dian
 
 def test_address_validator() -> str:
 
@@ -16,6 +16,18 @@ def test_address_validator_dian() -> str:
     else:
        return address+" direccion invalida"
 
+def test_address_validator_file() -> None:
+
+    with open("address.txt") as file_object:
+         address_validator_file(file_object)
+
+def test_address_validator_file_dian() -> None:
+
+    with open("addressDian.txt") as file_object:
+         address_validator_file_dian(file_object)
+
 if __name__ == "__main__":
     print(test_address_validator())
     print(test_address_validator_dian())
+    test_address_validator_file()
+    test_address_validator_file_dian()
