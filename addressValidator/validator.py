@@ -1,6 +1,6 @@
-from mealy import State,Path
 from typing import TextIO
 
+from addressValidator.mealy import Path, State
 
 q0 = State("q0")
 q1 = State("q1")
@@ -153,6 +153,3 @@ def address_validator_file_dian(file: TextIO)-> None:
             elif not address_validator_dian(file):
                 file_object.write(file+" rechazada\n")
 
-if __name__ == "__main__":
-    with open("address.txt") as file_object:
-        address_validator_file(file_object)
