@@ -54,14 +54,12 @@ class State:
     def walk(self, steps: str) -> Iterator[MealyResult]:
         state = self
         out = None
-        steps = steps.rstrip('\n')
         words = re.split(r"[- #]",steps)
         words = list(filter(None, words))
         if(words[0] == "Avenida" and words[1] == "Calle" or words[0] == "Avenida" and words[1]=="Carrera" or words[0] == "Cuentas" and words[1]=="Corridas"):
             words.insert(0,words[0]+" "+words[1])
             words.pop(1)
             words.pop(1)
-        print(words)
 
         for word in words:
             result: Optional[MealyResult] = state.step(word)
@@ -70,6 +68,7 @@ class State:
                     out = result.out
                     print(result)
             else:
+                print(result)
                 return False
         if out == "1":
             return True
@@ -164,13 +163,9 @@ def address_validator(word: str = "Calle 3B #10-03") -> bool:
     # q0.walk("Barrio San_Juan Etapa 3 Manzana 4 Apartamento 501")
     # q0.walk("Kilometro 32 Via Duitama-Paipa")
 
-    print(validation)
-    if validation :
-        print("Cadena Aceptada")
-    else:
-        print("Cadena rechazada")
+    return validation
 
-def address_validator_dian(word: str = "CL 3 B 10 03")-> bool:
+def address_validator_dian(word: str = "CL 3 B 10 03") -> bool:
    
     q0.set_paths([Path("tv", q1, "0",r'\b(AU|AV|AC|AK|BL|CL|KR|CT|CQ|CV|DG|CC|PJ|PS|PT|TV|VT|VI|TC)\b'), Path("br2", q19, "0",r'\b(BR|CD|SM)\b'),Path("vda", q27, "0",r'\bVDA\b'),Path("km", q31, "0",r'\bKM\b')])
     #Urbana
@@ -214,22 +209,24 @@ def address_validator_dian(word: str = "CL 3 B 10 03")-> bool:
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
 
     validation = q0.walk(word)
-
-    print(validation)
-    if validation :
-        print("Cadena Aceptada")
-    else:
-        print("Cadena rechazada")
+    return validation
 
 def address_validator_file(file: TextIO):
     files_address: str = file.readlines()
-    for file in files_address:
-        address_validator(file)
+    with open("output.txt","w") as file_object:
+        for file in files_address:
+            file = file.rstrip('\n')
+            if address_validator(file):
+                file_object.write(file+" aceptada\n")
+            elif not address_validator(file):
+                file_object.write(file+" rechazada\n")
+                
+            
 
 def address_validator_file_dian(file: TextIO):
     files_address: str = file.readlines()
     for file in files_address:
-        address_validator_dian(file)
+        print(address_validator_dian(file))
 
 if __name__ == "__main__":
     with open("address.txt") as file_object:
