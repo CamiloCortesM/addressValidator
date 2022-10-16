@@ -41,7 +41,7 @@ q35 = State("q35")
 
 
 
-def address_validator(word: str = "Calle 3B #10-03") -> bool:
+def address_validator(word: str) -> bool:
     q0.set_paths([Path("tv", q1, "0",r'\b(Autopista|Avenida|Avenida Calle|Avenida Carrera|Bulevar|Calle|Carrera|Carretera|Circular|Circunvalar|Diagonal|Cuentas Corridas|Pasaje|Paseo|Peatonal|Transversal|Variante|Via|Troncal)\b'), Path("br2", q19, "0",r'\b(Barrio|Ciudadela|Supermanzana)\b'),Path("vda", q27, "0",r'\bVereda\b'),Path("km", q31, "0",r'\bKilometro\b')])
     #Urbana
     q1.set_paths([Path("nv", q2, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
@@ -64,7 +64,7 @@ def address_validator(word: str = "Calle 3B #10-03") -> bool:
     
     #Barrio // urbana
     q19.set_paths([Path("nb", q20, "0",r'^\w+$')])
-    q20.set_paths([Path("u", q21, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("nb", q20, "0",r'^\w+$')])
+    q20.set_paths([Path("u", q21, "0",r'^(Bloque|Celula|Etapa|Urbanizacion|Sector|Torre|Zona)$'),Path("ma", q23, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$'),Path("nb", q20, "0",r'^\w+$')])
     q21.set_paths([Path("nu", q22, "0",r'^\w+$')])
     q22.set_paths([Path("ma", q23, "0",r'^(Manzana|Interior|Sector|Etapa|Edificio|Modulo|Torre)$')])
     q23.set_paths([Path("nma", q24, "1",r'^\w+$')])
@@ -82,10 +82,9 @@ def address_validator(word: str = "Calle 3B #10-03") -> bool:
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
     
-    validation = q0.walk(word)
-    return validation
+    return q0.walk(word)
 
-def address_validator_dian(word: str = "CL 3 B 10 03") -> bool:
+def address_validator_dian(word: str) -> bool:
    
     q0.set_paths([Path("tv", q1, "0",r'\b(AU|AV|AC|AK|BL|CL|KR|CT|CQ|CV|DG|CC|PJ|PS|PT|TV|VT|VI|TC)\b'), Path("br2", q19, "0",r'\b(BR|CD|SM)\b'),Path("vda", q27, "0",r'\bVDA\b'),Path("km", q31, "0",r'\bKM\b')])
     #Urbana
@@ -110,7 +109,7 @@ def address_validator_dian(word: str = "CL 3 B 10 03") -> bool:
    
     #Barrio // urbana
     q19.set_paths([Path("nb", q20, "0",r'^\w+$')])
-    q20.set_paths([Path("u", q21, "0",r'^(BQ|CU|ET|UR|SC|TO|ZN)$'),Path("nb", q20, "0",r'^\w+$')])
+    q20.set_paths([Path("u", q21, "0",r'^(BQ|CU|ET|UR|SC|TO|ZN)$'),Path("ma", q23, "0",r'^(MZ|IN|SC|ET|ED|MD|TO)$'),Path("nb", q20, "0",r'^\w+$')])
     q21.set_paths([Path("nu", q22, "0",r'^\w+$')])
     q22.set_paths([Path("ma", q23, "0",r'^(MZ|IN|SC|ET|ED|MD|TO)$')])
     q23.set_paths([Path("nma", q24, "1",r'^\w+$')])
@@ -128,8 +127,8 @@ def address_validator_dian(word: str = "CL 3 B 10 03") -> bool:
     q33.set_paths([Path("n1", q34, "1",r'^\w+$')])
     q34.set_paths([Path("n2", q35, "1",r'^\w+$')])
 
-    validation = q0.walk(word)
-    return validation
+    return q0.walk(word)
+
 
 def address_validator_file(file: TextIO) -> None:
     files_address: str = file.readlines()
