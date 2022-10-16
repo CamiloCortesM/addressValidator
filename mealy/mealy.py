@@ -225,8 +225,13 @@ def address_validator_file(file: TextIO):
 
 def address_validator_file_dian(file: TextIO):
     files_address: str = file.readlines()
-    for file in files_address:
-        print(address_validator_dian(file))
+    with open("output.txt","w") as file_object:
+        for file in files_address:
+            file = file.rstrip('\n')
+            if address_validator_dian(file):
+                file_object.write(file+" aceptada\n")
+            elif not address_validator_dian(file):
+                file_object.write(file+" rechazada\n")
 
 if __name__ == "__main__":
     with open("address.txt") as file_object:
