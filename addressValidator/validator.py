@@ -46,7 +46,7 @@ def address_validator(word: str = "Calle 3B #10-03") -> bool:
     #Urbana
     q1.set_paths([Path("nv", q2, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q2.set_paths([Path("bis", q3, "0",r'^(BIS|Bis)$'),Path("c", q5, "0",r'^(NORTE|Norte|SUR|Sur|ESTE|Este|OESTE|Oeste)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
-    q3.set_paths([Path("lp", q4, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
+    q3.set_paths([Path("lp", q4, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$'),Path("c", q5, "0",r'^(NORTE|Norte|SUR|Sur|ESTE|Este|OESTE|Oeste)$')])
     q4.set_paths([Path("c", q5, "0",r'^(NORTE|Norte|SUR|Sur|ESTE|Este|OESTE|Oeste)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q5.set_paths([Path("nv", q6, "0",r'^[1-9][0-9]{0,2}(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1})|)$')])
     q6.set_paths([Path("bis", q7, "0",r'^(BIS|Bis)$'),Path("np", q9, "1",r'\b[1-9][0-9]{0,2}\b')])
@@ -91,7 +91,7 @@ def address_validator_dian(word: str = "CL 3 B 10 03") -> bool:
     #Urbana
     q1.set_paths([Path("nv", q2, "0",r'^[1-9][0-9]{0,2}$')])
     q2.set_paths([Path("lv", q2, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1}))$'),Path("bis", q3, "0",r'^(BIS)$'),Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}$')])
-    q3.set_paths([Path("lp", q4, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1}))$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}$')])
+    q3.set_paths([Path("lp", q4, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1}))$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}$'),Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$')])
     q4.set_paths([Path("c", q5, "0",r'^(NORTE|SUR|ESTE|OESTE)$'),Path("nv", q6, "0",r'^[1-9][0-9]{0,2}$')])
     q5.set_paths([Path("nv", q6, "0",r'^[1-9][0-9]{0,2}$')])
     q6.set_paths([Path("lv", q6, "0",r'^(([A-Z][1-9][A-Z])|([A-Z]{2})|([A-Z]{0,1}))$'),Path("bis", q7, "0",r'^(BIS)$'),Path("np", q9, "1",r'\b[1-9][0-9]{0,2}\b')])
