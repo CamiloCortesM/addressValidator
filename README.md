@@ -62,7 +62,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+the project was developed through the definition of Mealy machines, regular expressions, regular grammars, Automata, for the validation of all addresses currently valid in Colombia.
 
+the standardization of [urban addresses of the ministry of education](https://www.mineducacion.gov.co/1621/articles-193290_estandar_direcciones_urbanas.pdf) was used as a guideline. 
 <!-- ROADMAP -->
 ## Documentation
 
