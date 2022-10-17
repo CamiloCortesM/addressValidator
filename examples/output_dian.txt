@@ -1,0 +1,15 @@
+KR 110 A 86 B 28 MZ 19 aceptada
+CL 72 28 D3A 84 aceptada
+CL 44 G SUR 72 A 77 ESTE aceptada
+BR LAS ACACIAS MZ D LT 9 aceptada
+BR EL POZON SC 14 MZ D LT 1 aceptada
+BR LA CONSOLATA SC ISABEL MZ O LT 2 aceptada
+BR BELEN MZ 4 CS 1 aceptada
+CL 23 B 77 15 BR EL SOCORRO MZ 34 aceptada
+CL 80 D 42 2 MZ 4 LC 44 aceptada
+CL 12 58 BR EL CAMPESTRE ET 7 EQ rechazada
+CL 1 A NORTE 7 A 76 BR SEVILLA aceptada
+CL 8 3 40 BR GUAMALITO aceptada
+AV 6 A 8 65 aceptada
+KR 24 32 27 BR LA CLARITA aceptada
+KR 27 15 30 BR SAN PEDRO  aceptada
