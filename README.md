@@ -73,8 +73,12 @@
 
 ```bash
 pip install addressValidator
-```
 
+or
+
+py -m pip install addressValidator
+```
+latest stable version `addressValidator==1.2.1`
 <!-- USAGE EXAMPLES -->
 ### Usage
 
