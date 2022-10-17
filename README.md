@@ -2,7 +2,7 @@
 <br />
 <p align="center">
     <img src="https://raw.githubusercontent.com/CamiloCortesM/addressValidator/main/images/logo.png" alt="Logo" width="300">
-  <h3 align="center">AVMWeather</h3>
+  <h3 align="center">addressValidator</h3>
 <p align="center">
     <a href="https://github.com/CamiloCortesM/addressValidator/graphs/contributors"><img src="https://img.shields.io/github/contributors/CamiloCortesM/addressValidator.svg?style=flat-square" alt="Contributors"></a>
     <a href="https://github.com/CamiloCortesM/addressValidator/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/CamiloCortesM/addressValidator.svg?style=flat-square"></a>
@@ -30,13 +30,30 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
+    <a href="#documentation">Documentation</a>
+    <ul>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#installation">Installation</a></li>
+        <a href="#installation">Installation</a>
+      </ul>
+    </ul>
+      <ul><a href="#usage">Usage</a></ul>
+      <ul>
+      <a href="#functions">functions</a>
+        <ul>
+        <a href="#address_validator">address_validator</a>
+        </ul>
+        <ul>
+        <a href="#address_validator_dian">address_validator_dian</a>
+        </ul>
+        <ul>
+        <a href="#address_validator_file">address_validator_file</a>
+        </ul>
+         <ul>
+        <a href="#address_validator_file_dian">address_validator_file_dian</a>
+        </ul>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#documentation">Documentation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -46,18 +63,20 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<!-- ROADMAP -->
+## Documentation
 
 <!-- GETTING STARTED -->
-## Getting Started
+### Getting Started
 
-### Installation
+#### Installation
 
-```python
+```bash
 pip install addressValidator
 ```
 
 <!-- USAGE EXAMPLES -->
-## Usage
+### Usage
 
 * Example 
     ```python
@@ -72,9 +91,74 @@ pip install addressValidator
 
 _For more examples, please refer to the [Examples packages](https://github.com/CamiloCortesM/addressValidator/tree/main/examples)_
 
-<!-- ROADMAP -->
-## Documentation
+<!-- FUNCTIONS -->
+### Functions
+we can use 4 functions to validate both urban and rural addresses
 
+#### address_validator
+
+address_validator function receives as a parameter a mandatory string which will be evaluated and will return a boolean if valid or not.
+
+```python
+from addressValidator import address_validator
+
+# address_validator(str) -> bool
+address = address_validator("Calle 13B #10-3")
+print(address)// #True
+```
+if the address is not valid it will return False
+
+```python
+from addressValidator import address_validator
+
+# address_validator(str) -> bool
+address = address_validator("Calle 13sur 13-121B")
+print(address)// #False
+```
+#### address_validator_dian
+fucntion address_validator_dian returns the address validation according to [dian nomenclature](https://www.mineducacion.gov.co/1621/articles-193290_estandar_direcciones_urbanas.pdf)
+
+```python
+from addressValidator import address_validator_dian
+
+# address_validator_dian(str) -> bool
+address = address_validator_dian("Cl 13 B 10 3")
+print(address)// #True
+```
+if the address is not valid it will return False
+
+```python
+from addressValidator import address_validator_dian
+
+# address_validator_dian(str) -> bool
+address = address_validator_dian("Cl 13 sur 13 121 B")
+print(address)// #False
+```
+
+#### address_validator_file
+address_validator_file function receives a text file, does not return any value, this function creates a text file with the respective validations.
+```python
+from addressValidator import address_validator_file
+
+# address_validator_file(file) -> None
+with open("address.txt") as file_object:
+     address_validator_file(file_object) # create output.txt
+
+```
+here we can see that we read a file called [address.txt](https://github.com/CamiloCortesM/addressValidator/blob/main/examples/address.txt) that we find in the examples folder this function will return the validations of all the strings as we can see in the [output.txt](https://github.com/CamiloCortesM/addressValidator/blob/main/examples/output.txt) file.All this for urban and rural addresses 
+
+#### address_validator_file_dian
+
+The function address_validator_file_dian receives a text file, creates a text file with the validations of the addresses with dian nomenclature 
+```python
+from addressValidator import address_validator_file_dian
+
+# address_validator_file_dian(file) -> None
+with open("addressDian.txt") as file_object:
+    address_validator_file_dian(file_object) # create output.txt
+
+```
+We read the [addressDian](https://github.com/CamiloCortesM/addressValidator/blob/main/examples/addressDian.txt) file from the root path and send the document to the function and it returns the validations in an `output.txt` file. Validations with file for dian nomenclature is in the [output_dian.txt](https://github.com/CamiloCortesM/addressValidator/blob/main/examples/output_dian.txt) file
 
 <!-- ROADMAP -->
 ## Roadmap
