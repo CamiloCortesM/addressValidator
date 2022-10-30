@@ -5,9 +5,9 @@
   <h3 align="center">addressValidator</h3>
 <p align="center">
     <a href="https://github.com/CamiloCortesM/addressValidator/graphs/contributors"><img src="https://img.shields.io/github/contributors/CamiloCortesM/addressValidator.svg?style=flat-square" alt="Contributors"></a>
-    <a href="https://github.com/CamiloCortesM/addressValidator/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/CamiloCortesM/addressValidator.svg?style=flat-square"></a>
-    <a href="https://github.com/CamiloCortesM/addressValidator/stargazers"><img src="https://img.shields.io/github/stars/CamiloCortesM/addressValidator.svg?style=flat-square" alt="starts"></a>
-    <a href="https://github.com/CamiloCortesM/addressValidator/blob/main/LICENSE"><img src="https://img.shields.io/github/license/CamiloCortesM/addressValidator.svg?style=flat-square" alt="license"></a>
+    <a href="https://github.com/CamiloCortesM/addressValidator/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/CamiloCortesM/addressValidator.svg"></a>
+    <a href="https://github.com/CamiloCortesM/addressValidator/stargazers"><img src="https://img.shields.io/github/stars/CamiloCortesM/addressValidator.svg" alt="starts"></a>
+    <a href="https://github.com/CamiloCortesM/addressValidator/blob/main/LICENSE"><img src="https://img.shields.io/github/license/CamiloCortesM/addressValidator.svg" alt="license"></a>
     <a href="https://pypi.org/project/addressValidator/"><img src="https://img.shields.io/badge/pypi-addressValidator-blue.svg?style=flat-square&maxAge=3600" alt="Slack"></a>
 </p>
     <p align="center">
